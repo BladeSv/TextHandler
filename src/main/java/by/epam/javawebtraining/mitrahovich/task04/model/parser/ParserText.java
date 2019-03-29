@@ -23,7 +23,6 @@ public class ParserText extends Parser {
 
 			ArrayList<String> tempList = new ArrayList<>();
 
-			System.out.println("split text");
 			for (String str : temp) {
 				if (str.length() > 0 && str != null && str != "") {
 

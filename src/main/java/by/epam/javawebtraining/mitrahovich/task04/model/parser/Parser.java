@@ -25,4 +25,8 @@ public abstract class Parser {
 		this.parserType = parserType;
 	}
 
+	public enum ParserType {
+		TEXT, PARAGRAPH, SENTENS, WORD, SIMVOL;
+
+	}
 }

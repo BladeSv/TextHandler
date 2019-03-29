@@ -13,9 +13,14 @@ import java.io.IOException;
 import org.apache.log4j.Logger;
 
 public class WorkerTextFile {
-	private static Logger logger = Logger.getRootLogger();
+	private static Logger logger;
+
 	private static String inputTexFileName = getInputTextFileName();
 	private static String outputTexFileName = getOutputTextFileName();
+
+	static {
+		logger = Logger.getRootLogger();
+	}
 
 	public WorkerTextFile() {
 

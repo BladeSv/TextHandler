@@ -6,41 +6,46 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import by.epam.javawebtraining.mitrahovich.task04.model.parser.Parser;
-import by.epam.javawebtraining.mitrahovich.task04.model.parser.ParserType;
+import by.epam.javawebtraining.mitrahovich.task04.model.parser.Parser.ParserType;
 
 public class ItemConteiner extends Item {
-	private static Logger logger = Logger.getRootLogger();
-	private String content = "";
-	private List<Treatment> conteiner;
+	private static Logger logger;
+
+	private String content;
 	private Parser parser;
+	private List<Treatment> conteiner;
+
+	static {
+		logger = Logger.getRootLogger();
+	}
 
 	public ItemConteiner() {
-
+		content = "";
 	}
 
 	/**
 	 * @param parser
 	 * @param next
 	 */
-	public ItemConteiner(Parser parser, Item next) {
-		super();
-		this.parser = parser;
-
-		conteiner = new LinkedList<Treatment>();
-	}
 
 	public ItemConteiner(Parser parser) {
 		super();
-		this.parser = parser;
-
+		setParser(parser);
+		content = "";
 		conteiner = new LinkedList<Treatment>();
 	}
 
-	public ItemConteiner(Item itemConteiner) {
-		super();
-		this.parser = itemConteiner.getParser();
+	public Parser getParser() {
+		return parser;
+	}
 
-		conteiner = new LinkedList<Treatment>();
+	public boolean setParser(Parser parser) {
+		if (parser != null) {
+			this.parser = parser;
+			return true;
+		}
+
+		return false;
 
 	}
 
@@ -48,38 +53,47 @@ public class ItemConteiner extends Item {
 		return content;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public boolean setContent(String content) {
+		if (content != null) {
+			this.content = content;
+			return true;
+		}
+
+		return false;
+
 	}
 
+	@Override
+	public ParserType getParserType() {
+
+		return getParser().getParserType();
+	}
+
+	@Override
 	public List<Treatment> getConteiner() {
+
 		return conteiner;
 	}
 
 	public void parsing(String text) {
 		if (text != null && text != "") {
-			logger.trace("parser=" + parser.getClass().getSimpleName() + ", text to parse=" + text);
+			logger.trace("parser=" + getParser().getClass().getSimpleName() + ", text to parse=" + text);
 			content = text;
 
-			List<String> parsedText = parser.parse(text);
+			List<String> parsedText = getParser().parse(text);
 
 			if (parsedText != null) {
-				logger.trace(parser.getClass().getSimpleName() + " array lengtht:" + parsedText.size());
+				logger.trace(getParser().getClass().getSimpleName() + " array lengtht:" + parsedText.size());
 				for (String str : parsedText) {
-					if (str.length() > 1 && parser.getNext() != null) {
-						Item temp = null;
-
-						temp = new ItemConteiner(parser.getNext());
-						if (parser.getParserType() == ParserType.TEXT) {
-
-						}
+					if (str.trim().length() > 1 && getParser().getNext() != null) {
+						Item temp = new ItemConteiner(getParser().getNext());
 
 						temp.parsing(str);
 						conteiner.add(temp);
 
-						logger.trace(parser.getClass().getSimpleName() + " parsed on paths:" + str);
+						logger.trace(getParser().getClass().getSimpleName() + " parsed on paths:" + str);
 
-					} else if (str.length() == 1 || parser.getNext() == null) {
+					} else if (str.trim().length() <= 1 || getParser().getNext() == null) {
 						Item item = new Item();
 						item.parsing(str);
 

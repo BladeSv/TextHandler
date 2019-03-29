@@ -1,45 +1,18 @@
 package by.epam.javawebtraining.mitrahovich.task04.model.entity;
 
-import by.epam.javawebtraining.mitrahovich.task04.model.parser.Parser;
+import java.util.List;
 
-public class Item implements Treatment, Cloneable {
+import by.epam.javawebtraining.mitrahovich.task04.model.parser.Parser.ParserType;
+
+public class Item implements Treatment {
 	private String content;
 
-	private Parser parser;
-
-	private Item next;
-
 	public Item() {
-
-	}
-
-	public Item(Item item) {
-
-	}
-
-	public Parser getParser() {
-		return parser;
-	}
-
-	public void setParser(Parser parser) {
-		this.parser = parser;
-	}
-
-	public Item getNext() {
-		return next;
-	}
-
-	public void setNext(Item next) {
-		this.next = next;
+		content = "";
 	}
 
 	public void parsing(String text) {
 		content = text;
-	}
-
-	public String collect() {
-
-		return content;
 	}
 
 	@Override
@@ -69,14 +42,20 @@ public class Item implements Treatment, Cloneable {
 
 	@Override
 	public String toString() {
-		// System.out.println("Item-" + content);
+
 		return content;
 	}
 
 	@Override
-	protected Object clone() throws CloneNotSupportedException {
+	public ParserType getParserType() {
 
-		return super.clone();
+		return null;
+	}
+
+	@Override
+	public List<Treatment> getConteiner() {
+
+		return null;
 	}
 
 }

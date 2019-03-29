@@ -18,7 +18,7 @@ public class ParserParagraph extends Parser {
 	public List<String> parse(String text) {
 		if (text != null && text.length() > 1) {
 
-			Pattern p = Pattern.compile("\\.(?= |\n)");
+			Pattern p = Pattern.compile("[.?!](?= |\n)");
 
 			String[] temp = p.split(text);
 
@@ -30,6 +30,7 @@ public class ParserParagraph extends Parser {
 			for (int i = 1; i < temp.length; i++) {
 				if (temp[i] != null && temp[i].length() > 0) {
 					tempList.add(".");
+
 					tempList.add(temp[i]);
 
 				}
