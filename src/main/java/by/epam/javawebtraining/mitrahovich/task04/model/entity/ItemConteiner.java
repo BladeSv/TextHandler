@@ -11,7 +11,6 @@ import by.epam.javawebtraining.mitrahovich.task04.model.parser.Parser.ParserType
 public class ItemConteiner extends Item {
 	private static Logger logger;
 
-	private String content;
 	private Parser parser;
 	private List<Treatment> conteiner;
 
@@ -20,7 +19,7 @@ public class ItemConteiner extends Item {
 	}
 
 	public ItemConteiner() {
-		content = "";
+
 	}
 
 	/**
@@ -31,7 +30,7 @@ public class ItemConteiner extends Item {
 	public ItemConteiner(Parser parser) {
 		super();
 		setParser(parser);
-		content = "";
+
 		conteiner = new LinkedList<Treatment>();
 	}
 
@@ -49,13 +48,9 @@ public class ItemConteiner extends Item {
 
 	}
 
-	public String getContent() {
-		return content;
-	}
-
 	public boolean setContent(String content) {
 		if (content != null) {
-			this.content = content;
+
 			return true;
 		}
 
@@ -78,7 +73,6 @@ public class ItemConteiner extends Item {
 	public void parsing(String text) {
 		if (text != null && text != "") {
 			logger.trace("parser=" + getParser().getClass().getSimpleName() + ", text to parse=" + text);
-			content = text;
 
 			List<String> parsedText = getParser().parse(text);
 

@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 import by.epam.javawebtraining.mitrahovich.task04.model.entity.Treatment;
 import by.epam.javawebtraining.mitrahovich.task04.model.parser.Parser;
 
-public abstract class Strategy {
+public class Strategy {
 
 	private static Logger logger;
 
